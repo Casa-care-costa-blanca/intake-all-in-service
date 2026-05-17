@@ -3,410 +3,121 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Intakeformulier — Casa Care Costa Blanca</title>
+<title>Intakeformulier All-in Verhuur — Casa Care Costa Blanca</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --sand: #f5f0e8;
-    --sand-dark: #e8e0d0;
-    --terra: #c4854a;
-    --terra-dark: #a06838;
-    --deep: #1a2332;
-    --deep-mid: #2d3f55;
-    --white: #fdfbf8;
-    --muted: #8a9aaa;
-    --border: #d4c9b8;
-    --success: #4a8c6f;
-    --error: #c44a4a;
-    --radius: 4px;
+    --sand: #f5f0e8; --sand-dark: #e8e0d0; --terra: #c4854a; --terra-dark: #a06838;
+    --deep: #1a2332; --deep-mid: #2d3f55; --white: #fdfbf8; --muted: #8a9aaa;
+    --border: #d4c9b8; --success: #4a8c6f; --error: #c44a4a; --radius: 4px;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--sand); color: var(--deep); min-height: 100vh; font-size: 15px; line-height: 1.6; }
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--sand);
-    color: var(--deep);
-    min-height: 100vh;
-    font-size: 15px;
-    line-height: 1.6;
-  }
+  .hero { background: var(--deep); color: var(--white); padding: 60px 40px 50px; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 60%, rgba(196,133,74,0.18) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(196,133,74,0.10) 0%, transparent 50%); pointer-events: none; }
+  .hero-label { font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--terra); margin-bottom: 20px; }
+  .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 5vw, 52px); font-weight: 300; line-height: 1.15; margin-bottom: 16px; }
+  .hero h1 em { font-style: italic; color: var(--terra); }
+  .hero p { font-size: 15px; color: rgba(253,251,248,0.7); max-width: 520px; margin: 0 auto; font-weight: 300; }
 
-  /* ── Header ── */
-  .hero {
-    background: var(--deep);
-    color: var(--white);
-    padding: 60px 40px 50px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 30% 60%, rgba(196,133,74,0.18) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 20%, rgba(196,133,74,0.10) 0%, transparent 50%);
-    pointer-events: none;
-  }
-  .hero-label {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--terra);
-    margin-bottom: 20px;
-  }
-  .hero h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(32px, 5vw, 52px);
-    font-weight: 300;
-    letter-spacing: -0.5px;
-    line-height: 1.15;
-    margin-bottom: 16px;
-  }
-  .hero h1 em {
-    font-style: italic;
-    color: var(--terra);
-  }
-  .hero p {
-    font-size: 15px;
-    color: rgba(253,251,248,0.7);
-    max-width: 520px;
-    margin: 0 auto;
-    font-weight: 300;
-  }
+  .progress-wrap { background: var(--deep-mid); padding: 16px 40px; display: flex; align-items: center; gap: 20px; position: sticky; top: 0; z-index: 100; }
+  .progress-bar-track { flex: 1; height: 3px; background: rgba(255,255,255,0.15); border-radius: 2px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; background: var(--terra); border-radius: 2px; transition: width 0.4s ease; width: 0%; }
+  .progress-text { font-size: 12px; color: rgba(253,251,248,0.6); white-space: nowrap; font-weight: 500; letter-spacing: 0.5px; }
 
-  /* ── Progress bar ── */
-  .progress-wrap {
-    background: var(--deep-mid);
-    padding: 16px 40px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .progress-bar-track {
-    flex: 1;
-    height: 3px;
-    background: rgba(255,255,255,0.15);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-  .progress-bar-fill {
-    height: 100%;
-    background: var(--terra);
-    border-radius: 2px;
-    transition: width 0.4s ease;
-    width: 0%;
-  }
-  .progress-text {
-    font-size: 12px;
-    color: rgba(253,251,248,0.6);
-    white-space: nowrap;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-  }
+  .form-container { max-width: 780px; margin: 0 auto; padding: 40px 24px 80px; }
 
-  /* ── Layout ── */
-  .form-container {
-    max-width: 780px;
-    margin: 0 auto;
-    padding: 40px 24px 80px;
-  }
+  .section { background: var(--white); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 28px; overflow: hidden; animation: fadeUp 0.4s ease both; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  .section:nth-child(2) { animation-delay:.05s } .section:nth-child(3) { animation-delay:.10s }
+  .section:nth-child(4) { animation-delay:.15s } .section:nth-child(5) { animation-delay:.20s }
+  .section:nth-child(6) { animation-delay:.25s } .section:nth-child(7) { animation-delay:.30s }
+  .section:nth-child(8) { animation-delay:.35s } .section:nth-child(9) { animation-delay:.40s }
+  .section:nth-child(10) { animation-delay:.45s } .section:nth-child(11) { animation-delay:.50s }
+  .section:nth-child(12) { animation-delay:.55s }
 
-  /* ── Section card ── */
-  .section {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    margin-bottom: 28px;
-    overflow: hidden;
-    animation: fadeUp 0.4s ease both;
-  }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  .section:nth-child(2)  { animation-delay: 0.05s; }
-  .section:nth-child(3)  { animation-delay: 0.10s; }
-  .section:nth-child(4)  { animation-delay: 0.15s; }
-  .section:nth-child(5)  { animation-delay: 0.20s; }
-  .section:nth-child(6)  { animation-delay: 0.25s; }
-  .section:nth-child(7)  { animation-delay: 0.30s; }
-  .section:nth-child(8)  { animation-delay: 0.35s; }
-  .section:nth-child(9)  { animation-delay: 0.40s; }
-  .section:nth-child(10) { animation-delay: 0.45s; }
-  .section:nth-child(11) { animation-delay: 0.50s; }
-  .section:nth-child(12) { animation-delay: 0.55s; }
+  .section-header { background: var(--deep); color: var(--white); padding: 18px 28px; display: flex; align-items: center; gap: 14px; }
+  .section-num { width: 28px; height: 28px; border-radius: 50%; background: var(--terra); color: white; font-size: 12px; font-weight: 500; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; }
+  .section-body { padding: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px 24px; }
 
-  .section-header {
-    background: var(--deep);
-    color: var(--white);
-    padding: 18px 28px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-  .section-num {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: var(--terra);
-    color: white;
-    font-size: 12px;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
-    font-weight: 400;
-    letter-spacing: 0.3px;
-  }
-  .section-body {
-    padding: 28px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px 24px;
-  }
-  .section-body.single-col {
-    grid-template-columns: 1fr;
-  }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field.full { grid-column: 1 / -1; }
+  label { font-size: 12px; font-weight: 500; letter-spacing: 0.8px; text-transform: uppercase; color: var(--muted); }
+  label .req { color: var(--terra); margin-left: 2px; }
+  label .note { font-size: 11px; font-weight: 400; letter-spacing: 0; text-transform: none; color: var(--muted); display: block; margin-top: 2px; }
 
-  /* ── Field ── */
-  .field {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+  input[type="text"], input[type="email"], input[type="tel"], input[type="number"], input[type="date"], select, textarea {
+    width: 100%; padding: 11px 14px; border: 1px solid var(--border); border-radius: var(--radius);
+    background: var(--white); font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--deep);
+    transition: border-color 0.2s, box-shadow 0.2s; outline: none; -webkit-appearance: none;
   }
-  .field.full {
-    grid-column: 1 / -1;
-  }
-  label {
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-  label .req {
-    color: var(--terra);
-    margin-left: 2px;
-  }
-  label .note {
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 0;
-    text-transform: none;
-    color: var(--muted);
-    display: block;
-    margin-top: 2px;
-  }
+  input:focus, select:focus, textarea:focus { border-color: var(--terra); box-shadow: 0 0 0 3px rgba(196,133,74,0.12); }
+  textarea { resize: vertical; min-height: 80px; }
+  select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238a9aaa' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; cursor: pointer; }
 
-  input[type="text"],
-  input[type="email"],
-  input[type="tel"],
-  input[type="number"],
-  input[type="date"],
-  select,
-  textarea {
-    width: 100%;
-    padding: 11px 14px;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    background: var(--white);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    color: var(--deep);
-    transition: border-color 0.2s, box-shadow 0.2s;
-    outline: none;
-    -webkit-appearance: none;
-  }
-  input:focus, select:focus, textarea:focus {
-    border-color: var(--terra);
-    box-shadow: 0 0 0 3px rgba(196,133,74,0.12);
-  }
-  textarea {
-    resize: vertical;
-    min-height: 80px;
-  }
-  select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238a9aaa' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 14px center;
-    padding-right: 36px;
-    cursor: pointer;
-  }
-
-  /* ── Radio / Checkbox group ── */
-  .radio-group, .check-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-top: 2px;
-  }
-  .radio-group.inline, .check-group.inline {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .radio-item, .check-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    padding: 10px 14px;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    transition: border-color 0.15s, background 0.15s;
-    font-size: 14px;
-    user-select: none;
-  }
-  .radio-item:hover, .check-item:hover {
-    border-color: var(--terra);
-    background: rgba(196,133,74,0.04);
-  }
-  .radio-item input, .check-item input {
-    width: 16px;
-    height: 16px;
-    border: 1.5px solid var(--border);
-    border-radius: 50%;
-    appearance: none;
-    -webkit-appearance: none;
-    cursor: pointer;
-    flex-shrink: 0;
-    position: relative;
-    transition: border-color 0.15s, background 0.15s;
-    padding: 0;
-    box-shadow: none;
-  }
+  .radio-group, .check-group { display: flex; flex-direction: column; gap: 8px; margin-top: 2px; }
+  .radio-group.inline, .check-group.inline { flex-direction: row; flex-wrap: wrap; gap: 8px; }
+  .radio-item, .check-item { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; padding: 10px 14px; border: 1px solid var(--border); border-radius: var(--radius); transition: border-color 0.15s, background 0.15s; font-size: 14px; user-select: none; }
+  .radio-item:hover, .check-item:hover { border-color: var(--terra); background: rgba(196,133,74,0.04); }
+  .radio-item input, .check-item input { width: 16px; height: 16px; min-width: 16px; border: 1.5px solid var(--border); border-radius: 50%; appearance: none; -webkit-appearance: none; cursor: pointer; flex-shrink: 0; position: relative; transition: border-color 0.15s, background 0.15s; padding: 0; box-shadow: none; margin-top: 2px; }
   .check-item input { border-radius: 3px; }
-  .radio-item input:checked, .check-item input:checked {
-    border-color: var(--terra);
-    background: var(--terra);
-  }
-  .radio-item input:checked::after {
-    content: '';
-    position: absolute;
-    inset: 3px;
-    background: white;
-    border-radius: 50%;
-  }
-  .check-item input:checked::after {
-    content: '✓';
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 10px;
-    line-height: 14px;
-    text-align: center;
-  }
-  .radio-item:has(input:checked), .check-item:has(input:checked) {
-    border-color: var(--terra);
-    background: rgba(196,133,74,0.06);
-  }
+  .radio-item input:checked, .check-item input:checked { border-color: var(--terra); background: var(--terra); }
+  .radio-item input:checked::after { content: ''; position: absolute; inset: 3px; background: white; border-radius: 50%; }
+  .check-item input:checked::after { content: '✓'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: white; font-size: 10px; line-height: 14px; text-align: center; }
+  .radio-item:has(input:checked), .check-item:has(input:checked) { border-color: var(--terra); background: rgba(196,133,74,0.06); }
 
-  /* ── Conditional fields ── */
-  .conditional {
-    display: none;
-    margin-top: 10px;
-  }
-  .conditional.visible { display: block; }
+  .info-box { background: rgba(196,133,74,0.08); border-left: 3px solid var(--terra); padding: 14px 16px; border-radius: 0 var(--radius) var(--radius) 0; font-size: 13px; color: var(--deep-mid); grid-column: 1 / -1; line-height: 1.7; }
+  .info-box ul { margin: 8px 0 0 16px; }
+  .info-box ul li { margin-bottom: 4px; }
 
-  /* ── Info box ── */
-  .info-box {
-    background: rgba(196,133,74,0.08);
-    border-left: 3px solid var(--terra);
-    padding: 12px 16px;
-    border-radius: 0 var(--radius) var(--radius) 0;
-    font-size: 13px;
-    color: var(--deep-mid);
-    grid-column: 1 / -1;
-  }
+  /* Pakket cards */
+  .pakket-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; grid-column: 1 / -1; margin-top: 4px; }
+  .pakket-card { border: 2px solid var(--border); border-radius: 8px; padding: 20px; cursor: pointer; transition: all 0.2s; position: relative; }
+  .pakket-card:hover { border-color: var(--terra); background: rgba(196,133,74,0.03); }
+  .pakket-card.selected { border-color: var(--terra); background: rgba(196,133,74,0.06); }
+  .pakket-card input[type="radio"] { position: absolute; opacity: 0; }
+  .pakket-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+  .pakket-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--deep); }
+  .pakket-price { font-size: 24px; font-weight: 500; color: var(--terra); white-space: nowrap; }
+  .pakket-price span { font-size: 11px; color: var(--muted); display: block; text-align: right; }
+  .pakket-desc { font-size: 13px; color: var(--muted); margin-bottom: 14px; line-height: 1.5; }
+  .pakket-features { list-style: none; padding: 0; }
+  .pakket-features li { font-size: 12px; color: var(--deep-mid); padding: 3px 0; display: flex; gap: 8px; align-items: flex-start; }
+  .pakket-features li::before { content: '✓'; color: var(--terra); font-weight: bold; flex-shrink: 0; margin-top: 1px; }
+  .pakket-badge { display: inline-block; background: var(--terra); color: white; font-size: 10px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; padding: 3px 8px; border-radius: 2px; margin-bottom: 8px; }
 
-  /* ── Submit ── */
-  .submit-area {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 32px 28px;
-    text-align: center;
-  }
-  .submit-area p {
-    font-size: 13px;
-    color: var(--muted);
-    margin-bottom: 24px;
-    max-width: 480px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .btn-submit {
-    background: var(--terra);
-    color: white;
-    border: none;
-    padding: 16px 48px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    border-radius: var(--radius);
-    cursor: pointer;
-    transition: background 0.2s, transform 0.1s;
-  }
+  .schoonmaak-box { background: var(--deep); color: var(--white); border-radius: 8px; padding: 20px; grid-column: 1 / -1; }
+  .schoonmaak-box h4 { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 400; margin-bottom: 12px; color: var(--terra); }
+  .schoonmaak-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 12px; }
+  .schoonmaak-item { background: rgba(255,255,255,0.07); border-radius: 4px; padding: 12px; }
+  .schoonmaak-item strong { display: block; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--terra); margin-bottom: 6px; }
+  .schoonmaak-item p { font-size: 12px; color: rgba(253,251,248,0.75); line-height: 1.6; }
+
+  .submit-area { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 32px 28px; text-align: center; }
+  .submit-area p { font-size: 13px; color: var(--muted); margin-bottom: 24px; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .btn-submit { background: var(--terra); color: white; border: none; padding: 16px 48px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; border-radius: var(--radius); cursor: pointer; transition: background 0.2s, transform 0.1s; }
   .btn-submit:hover { background: var(--terra-dark); }
   .btn-submit:active { transform: scale(0.98); }
   .btn-submit:disabled { background: var(--muted); cursor: not-allowed; }
 
-  /* ── Toast ── */
-  .toast {
-    position: fixed;
-    bottom: 32px;
-    right: 32px;
-    background: var(--deep);
-    color: white;
-    padding: 16px 24px;
-    border-radius: 6px;
-    font-size: 14px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-    transform: translateY(80px);
-    opacity: 0;
-    transition: all 0.3s ease;
-    z-index: 999;
-    max-width: 320px;
-  }
+  .toast { position: fixed; bottom: 32px; right: 32px; background: var(--deep); color: white; padding: 16px 24px; border-radius: 6px; font-size: 14px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); transform: translateY(80px); opacity: 0; transition: all 0.3s ease; z-index: 999; max-width: 320px; }
   .toast.show { transform: translateY(0); opacity: 1; }
   .toast.success { border-left: 4px solid var(--success); }
-  .toast.error   { border-left: 4px solid var(--error); }
+  .toast.error { border-left: 4px solid var(--error); }
 
-  /* ── Validation ── */
-  .field-error {
-    font-size: 12px;
-    color: var(--error);
-    margin-top: 2px;
-  }
-  input.invalid, select.invalid, textarea.invalid {
-    border-color: var(--error);
-  }
+  input.invalid, select.invalid, textarea.invalid { border-color: var(--error); }
 
-  /* ── Mobile ── */
   @media (max-width: 600px) {
     .hero { padding: 40px 20px 36px; }
     .progress-wrap { padding: 12px 20px; }
     .form-container { padding: 24px 16px 60px; }
     .section-body { grid-template-columns: 1fr; padding: 20px; }
-    .section-body .field.full { grid-column: 1; }
+    .field.full { grid-column: 1; }
     .radio-group.inline { flex-direction: column; }
+    .pakket-grid { grid-template-columns: 1fr; }
+    .schoonmaak-grid { grid-template-columns: 1fr; }
     .section-header { padding: 16px 20px; }
   }
 </style>
@@ -420,23 +131,16 @@
 </div>
 
 <div class="progress-wrap">
-  <div class="progress-bar-track">
-    <div class="progress-bar-fill" id="progressBar"></div>
-  </div>
+  <div class="progress-bar-track"><div class="progress-bar-fill" id="progressBar"></div></div>
   <div class="progress-text" id="progressText">0% ingevuld</div>
 </div>
 
 <div class="form-container">
 <form id="intakeForm" novalidate>
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- 1. PERSOONLIJKE GEGEVENS EIGENAAR -->
-<!-- ═══════════════════════════════════════════ -->
+<!-- ══════════════════════════ 1. PERSOONLIJKE GEGEVENS ══════════════════════════ -->
 <div class="section">
-  <div class="section-header">
-    <div class="section-num">1</div>
-    <div class="section-title">Persoonlijke gegevens eigenaar</div>
-  </div>
+  <div class="section-header"><div class="section-num">1</div><div class="section-title">Persoonlijke gegevens eigenaar</div></div>
   <div class="section-body">
     <div class="field full">
       <label>Volledige naam (zoals in ID-bewijs) <span class="req">*</span></label>
@@ -463,28 +167,13 @@
       <input type="text" name="iban_eigenaar" required>
     </div>
     <div class="field full">
-      <label>Fiscale status eigenaar <span class="req">*</span>
+      <label>Fiscale status <span class="req">*</span>
         <span class="note">Bepalend voor belastingaangifte (Modelo 210 vs. 100)</span>
       </label>
       <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="fiscale_status" value="Niet-resident Spanje" required> Niet-resident in Spanje</label>
-        <label class="radio-item"><input type="radio" name="fiscale_status" value="Fiscaal resident Spanje"> Fiscaal resident in Spanje</label>
-      </div>
-    </div>
-    <div class="field full">
-      <label>Factuurgegevens (indien afwijkend van bovenstaande)
-        <span class="note">Naam/Bedrijf, Adres, BTW-nummer</span>
-      </label>
-      <textarea name="factuur_gegevens" rows="3"></textarea>
-    </div>
-    <div class="field full">
-      <label>Heeft u een notariële volmacht (Poder Notarial) voor Casa Care? <span class="req">*</span>
-        <span class="note">Wettelijk vereist wanneer Casa Care namens u handelt in Spanje</span>
-      </label>
-      <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="poder_notarial" value="Ja, aanwezig" required> Ja, aanwezig</label>
-        <label class="radio-item"><input type="radio" name="poder_notarial" value="Nee, nog niet"> Nee, nog niet</label>
-        <label class="radio-item"><input type="radio" name="poder_notarial" value="In overleg"> In overleg</label>
+        <label class="radio-item"><input type="radio" name="fiscale_status" value="Inwoner Nederland" required> Inwoner Nederland</label>
+        <label class="radio-item"><input type="radio" name="fiscale_status" value="Niet-resident Spanje"> Niet-resident Spanje</label>
+        <label class="radio-item"><input type="radio" name="fiscale_status" value="Fiscaal resident Spanje"> Fiscaal resident Spanje</label>
       </div>
     </div>
     <div class="field full">
@@ -494,20 +183,21 @@
       <div class="radio-group inline">
         <label class="radio-item"><input type="radio" name="belasting_aangifte" value="Eigenaar regelt dit zelf"> Eigenaar regelt dit zelf</label>
         <label class="radio-item"><input type="radio" name="belasting_aangifte" value="Eigen gestor/boekhouder"> Eigen gestor/boekhouder</label>
-        <label class="radio-item"><input type="radio" name="belasting_aangifte" value="Doorverwijzing naar fiscaal bureau via Casa Care gewenst"> Doorverwijzing via Casa Care gewenst</label>
+        <label class="radio-item"><input type="radio" name="belasting_aangifte" value="Doorverwijzing via Casa Care gewenst"> Doorverwijzing via Casa Care gewenst</label>
       </div>
+    </div>
+    <div class="field full">
+      <label>Factuurgegevens (indien afwijkend van bovenstaande)
+        <span class="note">Naam/Bedrijf, Adres, BTW-nummer</span>
+      </label>
+      <textarea name="factuur_gegevens" rows="2"></textarea>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- 2. GEGEVENS VAN DE WONING -->
-<!-- ═══════════════════════════════════════════ -->
+<!-- ══════════════════════════ 2. GEGEVENS WONING ══════════════════════════ -->
 <div class="section">
-  <div class="section-header">
-    <div class="section-num">2</div>
-    <div class="section-title">Gegevens van de woning</div>
-  </div>
+  <div class="section-header"><div class="section-num">2</div><div class="section-title">Gegevens van de woning</div></div>
   <div class="section-body">
     <div class="field full">
       <label>Naam van het verblijf <span class="req">*</span></label>
@@ -523,11 +213,8 @@
       <label>Type woning <span class="req">*</span></label>
       <select name="type_woning" required>
         <option value="">— Selecteer —</option>
-        <option>Appartement</option>
-        <option>Villa</option>
-        <option>Townhouse</option>
-        <option>Bungalow</option>
-        <option>Anders</option>
+        <option>Appartement</option><option>Villa</option><option>Townhouse</option>
+        <option>Bungalow</option><option>Anders</option>
       </select>
     </div>
     <div class="field">
@@ -558,14 +245,8 @@
       <label>Oriëntatie van de woning</label>
       <select name="orientatie">
         <option value="">— Selecteer —</option>
-        <option>Noord</option>
-        <option>Oost</option>
-        <option>Zuid</option>
-        <option>West</option>
-        <option>Zuid-Oost</option>
-        <option>Zuid-West</option>
-        <option>Noord-Oost</option>
-        <option>Noord-West</option>
+        <option>Noord</option><option>Oost</option><option>Zuid</option><option>West</option>
+        <option>Zuid-Oost</option><option>Zuid-West</option><option>Noord-Oost</option><option>Noord-West</option>
       </select>
     </div>
     <div class="field">
@@ -583,14 +264,9 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- 3. VOORZIENINGEN -->
-<!-- ═══════════════════════════════════════════ -->
+<!-- ══════════════════════════ 3. VOORZIENINGEN ══════════════════════════ -->
 <div class="section">
-  <div class="section-header">
-    <div class="section-num">3</div>
-    <div class="section-title">Voorzieningen & faciliteiten</div>
-  </div>
+  <div class="section-header"><div class="section-num">3</div><div class="section-title">Voorzieningen & faciliteiten</div></div>
   <div class="section-body">
     <div class="field full">
       <label>Parkeren</label>
@@ -628,7 +304,7 @@
       </div>
     </div>
     <div class="field" id="wifi_details" style="display:none;">
-      <label>Netwerknaam + wificode <span class="req">*</span></label>
+      <label>Netwerknaam + wificode</label>
       <input type="text" name="wifi_code" placeholder="Netwerk: … / Code: …">
     </div>
     <div class="field full">
@@ -640,23 +316,22 @@
         <label class="check-item"><input type="checkbox" name="voorzieningen" value="BBQ"> BBQ</label>
         <label class="check-item"><input type="checkbox" name="voorzieningen" value="Buitendouche"> Buitendouche</label>
         <label class="check-item"><input type="checkbox" name="voorzieningen" value="Bergruimte/kelder"> Bergruimte/kelder</label>
-        <label class="check-item"><input type="checkbox" name="voorzieningen" value="Babyfaciliteiten (bedje, kinderstoel)"> Babyfaciliteiten</label>
+        <label class="check-item"><input type="checkbox" name="voorzieningen" value="Babyfaciliteiten"> Babyfaciliteiten</label>
         <label class="check-item"><input type="checkbox" name="voorzieningen" value="Smart TV"> Smart TV</label>
         <label class="check-item"><input type="checkbox" name="voorzieningen" value="Open haard"> Open haard</label>
         <label class="check-item"><input type="checkbox" name="voorzieningen" value="Jacuzzi/bubbelbad"> Jacuzzi/bubbelbad</label>
       </div>
     </div>
+    <div class="field full">
+      <label>Overige voorzieningen (vrij invullen)</label>
+      <input type="text" name="voorzieningen_overig" placeholder="bijv. sauna, laadpaal, buitenkeuken...">
+    </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- 4. LOCATIE & OMGEVING -->
-<!-- ═══════════════════════════════════════════ -->
+<!-- ══════════════════════════ 4. LOCATIE ══════════════════════════ -->
 <div class="section">
-  <div class="section-header">
-    <div class="section-num">4</div>
-    <div class="section-title">Locatie & omgeving</div>
-  </div>
+  <div class="section-header"><div class="section-num">4</div><div class="section-title">Locatie & omgeving</div></div>
   <div class="section-body">
     <div class="field">
       <label>Afstand tot dichtstbijzijnde strand</label>
@@ -673,7 +348,7 @@
     <div class="field">
       <label>Bereikbaarheid met openbaar vervoer</label>
       <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="ov" value="Goed (bus/tram nabij)"> Goed</label>
+        <label class="radio-item"><input type="radio" name="ov" value="Goed"> Goed</label>
         <label class="radio-item"><input type="radio" name="ov" value="Beperkt"> Beperkt</label>
         <label class="radio-item"><input type="radio" name="ov" value="Auto vereist"> Auto vereist</label>
       </div>
@@ -687,14 +362,9 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- 5. JURIDISCH & VERGUNNINGEN -->
-<!-- ═══════════════════════════════════════════ -->
+<!-- ══════════════════════════ 5. JURIDISCH ══════════════════════════ -->
 <div class="section">
-  <div class="section-header">
-    <div class="section-num">5</div>
-    <div class="section-title">Juridisch & vergunningen</div>
-  </div>
+  <div class="section-header"><div class="section-num">5</div><div class="section-title">Juridisch & vergunningen</div></div>
   <div class="section-body">
     <div class="info-box">
       🔒 Deze gegevens zijn wettelijk vereist voor legale toeristische verhuur in de Comunitat Valenciana. Zorg dat alle documenten up-to-date zijn.
@@ -720,43 +390,36 @@
       <input type="date" name="licentie_geldig_tot">
     </div>
     <div class="field">
-      <label>Energiecertificaat (Certificado Energético) aanwezig? <span class="req">*</span>
+      <label>Energiecertificaat (Certificado Energético) aanwezig?
         <span class="note">Wettelijk verplicht voor verhuur in Spanje</span>
       </label>
       <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="energiecertificaat" value="Ja" required> Ja</label>
+        <label class="radio-item"><input type="radio" name="energiecertificaat" value="Ja"> Ja</label>
         <label class="radio-item"><input type="radio" name="energiecertificaat" value="Nee"> Nee</label>
         <label class="radio-item"><input type="radio" name="energiecertificaat" value="In aanvraag"> In aanvraag</label>
       </div>
     </div>
     <div class="field">
-      <label>Cédula de habitabilidad aanwezig? <span class="req">*</span>
+      <label>Cédula de habitabilidad aanwezig?
         <span class="note">Bewoningsattest — wettelijk vereist</span>
       </label>
       <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="cedula" value="Ja" required> Ja</label>
+        <label class="radio-item"><input type="radio" name="cedula" value="Ja"> Ja</label>
         <label class="radio-item"><input type="radio" name="cedula" value="Nee"> Nee</label>
         <label class="radio-item"><input type="radio" name="cedula" value="In aanvraag"> In aanvraag</label>
       </div>
     </div>
     <div class="field">
-      <label>Escritura Pública (eigendomsakte) beschikbaar?</label>
-      <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="escritura" value="Ja"> Ja</label>
-        <label class="radio-item"><input type="radio" name="escritura" value="Nee"> Nee</label>
-      </div>
-    </div>
-    <div class="field">
       <label>Beperkingen vanuit VvE / comunidad?</label>
       <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="vve_beperking" value="Nee" id="vve_nee"> Nee</label>
+        <label class="radio-item"><input type="radio" name="vve_beperking" value="Nee"> Nee</label>
         <label class="radio-item"><input type="radio" name="vve_beperking" value="Ja" id="vve_ja"> Ja</label>
         <label class="radio-item"><input type="radio" name="vve_beperking" value="Onbekend"> Onbekend</label>
       </div>
     </div>
     <div class="field full" id="vve_toelichting" style="display:none;">
       <label>Toelichting beperkingen VvE/comunidad</label>
-      <textarea name="vve_toelichting_tekst" rows="3"></textarea>
+      <textarea name="vve_toelichting_tekst" rows="2"></textarea>
     </div>
     <div class="field">
       <label>Woning verzekerd voor verhuur?</label>
@@ -767,233 +430,84 @@
       </div>
     </div>
     <div class="field">
-      <label>Aansprakelijkheidsverzekering (Liability) aanwezig?</label>
+      <label>Aansprakelijkheidsverzekering aanwezig?</label>
       <div class="radio-group inline">
         <label class="radio-item"><input type="radio" name="verzekering_liability" value="Ja"> Ja</label>
         <label class="radio-item"><input type="radio" name="verzekering_liability" value="Nee"> Nee</label>
         <label class="radio-item"><input type="radio" name="verzekering_liability" value="Onbekend"> Onbekend</label>
       </div>
     </div>
+
+    <!-- SES Hospedajes -->
     <div class="info-box">
-      🏛️ <strong>Verplicht voor verhuur:</strong> Elke woning die toeristisch verhuurd wordt in Spanje moet geregistreerd zijn bij SES Hospedajes (Sistema de Registro de Viajeros). Zonder deze registratie is het wettelijk niet toegestaan om gasten te ontvangen. Casa Care kan u hierbij helpen.
+      🏛️ <strong>SES Hospedajes — wettelijk verplicht:</strong> Elke gast die in uw woning verblijft moet worden aangemeld bij SES Hospedajes (Sistema de Registro de Viajeros). Casa Care kan deze aanmelding volledig voor u verzorgen. Hiervoor hebben we de onderstaande gegevens nodig van de persoon die als verantwoordelijke wordt geregistreerd.
     </div>
     <div class="field full">
-      <label>Is de woning al geregistreerd bij SES Hospedajes? <span class="req">*</span></label>
+      <label>Wilt u dat Casa Care de gastenregistratie bij SES Hospedajes verzorgt? <span class="req">*</span>
+        <span class="note">Vul hieronder altijd de gevraagde gegevens in — deze hebben wij nodig voor de registratie</span>
+      </label>
       <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="ses" value="Ja" id="ses_ja" required> Ja</label>
-        <label class="radio-item"><input type="radio" name="ses" value="Nee"> Nee</label>
-        <label class="radio-item"><input type="radio" name="ses" value="Onbekend"> Onbekend</label>
+        <label class="radio-item"><input type="radio" name="ses_aanmelding" value="Ja, graag" id="ses_ja" required> Ja, graag</label>
+        <label class="radio-item"><input type="radio" name="ses_aanmelding" value="Nee, zelf regelen"> Nee, ik regel dit zelf</label>
       </div>
     </div>
-    <div class="field" id="ses_details_wrap" style="display:none;">
-      <label>SES gebruikersnaam / Código arrendador / Woningcode</label>
-      <input type="text" name="ses_gegevens" placeholder="Gebruikersnaam, códigos...">
+    <div class="field full">
+      <label>Naam van degene die wordt geregistreerd <span class="req">*</span>
+        <span class="note">Voor- en achternaam zoals in paspoort of NIE-document</span>
+      </label>
+      <input type="text" name="ses_naam" placeholder="Voor- en achternaam">
     </div>
     <div class="field">
-      <label>Toegang tot Certificado Digital of Cl@ve?</label>
+      <label>NIE-nummer <span class="req">*</span></label>
+      <input type="text" name="ses_nie" placeholder="bijv. X1234567A">
+    </div>
+    <div class="field">
+      <label>Geboortedatum <span class="req">*</span></label>
+      <input type="date" name="ses_geboortedatum">
+    </div>
+    <div class="field">
+      <label>Geslacht <span class="req">*</span></label>
       <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="certificado_digital" value="Ja"> Ja</label>
-        <label class="radio-item"><input type="radio" name="certificado_digital" value="Nee"> Nee</label>
-        <label class="radio-item"><input type="radio" name="certificado_digital" value="Onbekend"> Onbekend</label>
+        <label class="radio-item"><input type="radio" name="ses_geslacht" value="Man"> Man</label>
+        <label class="radio-item"><input type="radio" name="ses_geslacht" value="Vrouw"> Vrouw</label>
+        <label class="radio-item"><input type="radio" name="ses_geslacht" value="Anders"> Anders</label>
       </div>
     </div>
+    <div class="field">
+      <label>Nationaliteit <span class="req">*</span></label>
+      <input type="text" name="ses_nationaliteit" placeholder="bijv. Nederlands">
+    </div>
+    <div class="field">
+      <label>Telefoonnummer <span class="req">*</span></label>
+      <input type="tel" name="ses_telefoon" placeholder="+31 6 ...">
+    </div>
     <div class="field full">
-      <label>Wilt u dat Casa Care helpt met het SES-registratieproces?</label>
-      <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="ses_hulp" value="Ja, graag hulp"> Ja, graag hulp</label>
-        <label class="radio-item"><input type="radio" name="ses_hulp" value="Nee, ik regel dit zelf"> Nee, zelf regelen</label>
-        <label class="radio-item"><input type="radio" name="ses_hulp" value="In overleg"> In overleg</label>
-      </div>
+      <label>Thuisadres (niet het adres van de verhuurwoning) <span class="req">*</span>
+        <span class="note">Straat, huisnummer, postcode, plaats, land</span>
+      </label>
+      <input type="text" name="ses_adres" placeholder="bijv. Keizersgracht 1, 1015 CN Amsterdam, Nederland">
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- 6. DOELGROEP & POSITIONERING -->
-<!-- ═══════════════════════════════════════════ -->
+<!-- ══════════════════════════ 6. EIGEN GEBRUIK ══════════════════════════ -->
 <div class="section">
-  <div class="section-header">
-    <div class="section-num">6</div>
-    <div class="section-title">Doelgroep & positionering</div>
-  </div>
+  <div class="section-header"><div class="section-num">6</div><div class="section-title">Eigen gebruik & blokkering</div></div>
   <div class="section-body">
     <div class="field full">
-      <label>Primaire doelgroep <span class="req">*</span></label>
-      <div class="check-group inline">
-        <label class="check-item"><input type="checkbox" name="doelgroep" value="Stellen (rust/romantisch)"> Stellen</label>
-        <label class="check-item"><input type="checkbox" name="doelgroep" value="Gezinnen"> Gezinnen</label>
-        <label class="check-item"><input type="checkbox" name="doelgroep" value="Digital nomads"> Digital nomads</label>
-        <label class="check-item"><input type="checkbox" name="doelgroep" value="Luxe reizigers"> Luxe reizigers</label>
-        <label class="check-item"><input type="checkbox" name="doelgroep" value="Senioren"> Senioren</label>
-        <label class="check-item"><input type="checkbox" name="doelgroep" value="Sportgroepen"> Sportgroepen</label>
-      </div>
-    </div>
-    <div class="field full">
-      <label>Liever géén gasten van</label>
-      <textarea name="niet_doelgroep" rows="2" placeholder="bijv. jongeren/groepsfeesten, huisdierenbezitters..."></textarea>
-    </div>
-    <div class="field">
-      <label>Wilt u boekingen zelf kunnen goedkeuren? <span class="req">*</span></label>
-      <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="goedkeuring_boekingen" value="Ja" required> Ja</label>
-        <label class="radio-item"><input type="radio" name="goedkeuring_boekingen" value="Nee (direct boeken)"> Nee</label>
-        <label class="radio-item"><input type="radio" name="goedkeuring_boekingen" value="In overleg"> In overleg</label>
-      </div>
-    </div>
-    <div class="field">
-      <label>Minimale leeftijd hoofdboeker</label>
-      <input type="number" name="min_leeftijd" min="18" max="99" placeholder="bijv. 25">
-    </div>
-    <div class="field">
-      <label>Huisdieren toegestaan?</label>
-      <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="huisdieren" value="Ja"> Ja</label>
-        <label class="radio-item"><input type="radio" name="huisdieren" value="Nee"> Nee</label>
-        <label class="radio-item"><input type="radio" name="huisdieren" value="In overleg"> In overleg</label>
-      </div>
-    </div>
-    <div class="field">
-      <label>Rookbeleid</label>
-      <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="roken" value="Niet toegestaan"> Niet toegestaan</label>
-        <label class="radio-item"><input type="radio" name="roken" value="Alleen buiten"> Alleen buiten</label>
-        <label class="radio-item"><input type="radio" name="roken" value="Toegestaan"> Toegestaan</label>
-      </div>
-    </div>
-    <div class="field">
-      <label>Feesten / evenementen toegestaan?</label>
-      <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="feesten" value="Nee"> Nee</label>
-        <label class="radio-item"><input type="radio" name="feesten" value="In overleg"> In overleg</label>
-        <label class="radio-item"><input type="radio" name="feesten" value="Ja"> Ja</label>
-      </div>
-    </div>
-    <div class="field">
-      <label>Stiltepolicy (bijv. na 22:00 geen muziek buiten)?</label>
-      <input type="text" name="stiltepolicy" placeholder="bijv. na 22:00 geen geluid buiten">
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- 7. PLATFORMEN & SYSTEMEN -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="section">
-  <div class="section-header">
-    <div class="section-num">7</div>
-    <div class="section-title">Platformen & systemen</div>
-  </div>
-  <div class="section-body">
-    <div class="field full">
-      <label>Staat de woning al online op verhuurplatformen?</label>
-      <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="al_online" value="Ja" id="online_ja"> Ja</label>
-        <label class="radio-item"><input type="radio" name="al_online" value="Nee"> Nee</label>
-      </div>
-    </div>
-    <div class="field full" id="bestaande_platformen" style="display:none;">
-      <label>Op welke platformen staat de woning momenteel?</label>
-      <div class="check-group inline">
-        <label class="check-item"><input type="checkbox" name="huidige_platformen" value="Airbnb"> Airbnb</label>
-        <label class="check-item"><input type="checkbox" name="huidige_platformen" value="Booking.com"> Booking.com</label>
-        <label class="check-item"><input type="checkbox" name="huidige_platformen" value="VRBO/HomeAway"> VRBO/HomeAway</label>
-        <label class="check-item"><input type="checkbox" name="huidige_platformen" value="Micazu"> Micazu</label>
-        <label class="check-item"><input type="checkbox" name="huidige_platformen" value="Eigen website"> Eigen website</label>
-        <label class="check-item"><input type="checkbox" name="huidige_platformen" value="Anders"> Anders</label>
-      </div>
-    </div>
-    <div class="field full" id="bestaande_reviews" style="display:none;">
-      <label>Zijn er bestaande gastenreviews beschikbaar?</label>
-      <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="reviews_beschikbaar" value="Ja"> Ja</label>
-        <label class="radio-item"><input type="radio" name="reviews_beschikbaar" value="Nee"> Nee</label>
-      </div>
-    </div>
-    <div class="field full" id="toegang_listings" style="display:none;">
-      <label>Kan Casa Care toegang krijgen tot bestaande listings?</label>
-      <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="toegang_listings" value="Ja (via inloggegevens)"> Ja, via inloggegevens</label>
-        <label class="radio-item"><input type="radio" name="toegang_listings" value="Ja (via cohost-uitnodiging)"> Ja, via cohost</label>
-        <label class="radio-item"><input type="radio" name="toegang_listings" value="Nee (bespreken overdracht)"> Nee, bespreken</label>
-      </div>
-    </div>
-    <div class="field full">
-      <label>Op welke platformen wilt u komen te staan? <span class="req">*</span></label>
-      <div class="check-group inline">
-        <label class="check-item"><input type="checkbox" name="gewenste_platformen" value="Airbnb"> Airbnb</label>
-        <label class="check-item"><input type="checkbox" name="gewenste_platformen" value="Booking.com"> Booking.com</label>
-        <label class="check-item"><input type="checkbox" name="gewenste_platformen" value="VRBO"> VRBO</label>
-        <label class="check-item"><input type="checkbox" name="gewenste_platformen" value="Micazu"> Micazu</label>
-        <label class="check-item"><input type="checkbox" name="gewenste_platformen" value="In overleg"> In overleg</label>
-      </div>
-    </div>
-    <div class="field">
-      <label>Op naam van wie komen de accounts/listings?</label>
-      <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="accounts_naam" value="Eigenaar"> Eigenaar</label>
-        <label class="radio-item"><input type="radio" name="accounts_naam" value="Casa Care / Bedrijf"> Casa Care</label>
-        <label class="radio-item"><input type="radio" name="accounts_naam" value="In overleg"> In overleg</label>
-      </div>
-    </div>
-    <div class="field">
-      <label>Werkt u al met een PMS?</label>
-      <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="pms" value="Ja" id="pms_ja"> Ja</label>
-        <label class="radio-item"><input type="radio" name="pms" value="Nee"> Nee</label>
-      </div>
-    </div>
-    <div class="field" id="pms_welk" style="display:none;">
-      <label>Welk PMS-systeem?</label>
-      <input type="text" name="pms_naam">
-    </div>
-    <div class="field full">
-      <label>Akkoord met opzetten en beheren via Hostaway door Casa Care? <span class="req">*</span></label>
-      <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="hostaway_akkoord" value="Ja" required> Ja</label>
-        <label class="radio-item"><input type="radio" name="hostaway_akkoord" value="Nee"> Nee</label>
-        <label class="radio-item"><input type="radio" name="hostaway_akkoord" value="In overleg"> In overleg</label>
-      </div>
-    </div>
-    <div class="field full">
-      <label>Welk e-mailadres mag Casa Care gebruiken voor Hostaway-licentie?</label>
-      <input type="email" name="hostaway_email">
-    </div>
-    <div class="field full">
-      <label>In welke talen wilt u dat de listing beschikbaar is?</label>
-      <div class="check-group inline">
-        <label class="check-item"><input type="checkbox" name="listing_talen" value="Nederlands"> Nederlands</label>
-        <label class="check-item"><input type="checkbox" name="listing_talen" value="Engels"> Engels</label>
-        <label class="check-item"><input type="checkbox" name="listing_talen" value="Duits"> Duits</label>
-        <label class="check-item"><input type="checkbox" name="listing_talen" value="Spaans"> Spaans</label>
-        <label class="check-item"><input type="checkbox" name="listing_talen" value="Frans"> Frans</label>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- 8. EIGEN GEBRUIK & BLOKKERING -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="section">
-  <div class="section-header">
-    <div class="section-num">8</div>
-    <div class="section-title">Eigen gebruik & blokkering</div>
-  </div>
-  <div class="section-body">
-    <div class="field">
       <label>Gebruikt u de woning ook zelf? <span class="req">*</span></label>
       <div class="radio-group inline">
         <label class="radio-item"><input type="radio" name="eigen_gebruik" value="Ja" id="eigen_ja" required> Ja</label>
         <label class="radio-item"><input type="radio" name="eigen_gebruik" value="Nee"> Nee</label>
       </div>
     </div>
-    <div class="field" id="eigen_gebruik_details" style="display:none;">
-      <label>Hoeveel weken per jaar gebruikt u de woning zelf?</label>
-      <input type="number" name="eigen_gebruik_weken" min="0" max="52" placeholder="bijv. 4">
+    <div class="field" id="eigen_gebruik_weken" style="display:none;">
+      <label>Hoeveel weken per jaar gemiddeld?</label>
+      <input type="number" name="eigen_gebruik_weken_aantal" min="0" max="52" placeholder="bijv. 4">
     </div>
-    <div class="field full" id="blokkeer_periodes_wrap" style="display:none;">
-      <label>Vaste blokkeerperiodes per jaar
-        <span class="note">Vermeld gewenste periodes zodat we de kalender kunnen plannen (bijv. juli week 3-4, kerst)</span>
+    <div class="field full" id="eigen_gebruik_periodes" style="display:none;">
+      <label>Zijn er vaste periodes die u de woning zelf gebruikt?
+        <span class="note">Vermeld gewenste periodes zodat we de kalender kunnen plannen</span>
       </label>
       <textarea name="blokkeer_periodes" rows="3" placeholder="bijv. 15 juli – 15 augustus, 24 dec – 2 jan..."></textarea>
     </div>
@@ -1001,21 +515,12 @@
       <label>Procedure voor blokkeren — wie blokkeert en hoe ver vooruit?</label>
       <input type="text" name="blokkeer_procedure" placeholder="bijv. eigenaar blokkeert zelf via Hostaway, minimaal 4 weken vooraf">
     </div>
-    <div class="field full">
-      <label>Wie beheert de reservesleutels tijdens periodes van eigen gebruik?</label>
-      <input type="text" name="sleutel_eigen_gebruik" placeholder="bijv. eigenaar houdt zelf sleutels, Casa Care heeft reserveset">
-    </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- 9. CHECK-IN, TOEGANG & SLEUTELS -->
-<!-- ═══════════════════════════════════════════ -->
+<!-- ══════════════════════════ 7. CHECK-IN & TOEGANG ══════════════════════════ -->
 <div class="section">
-  <div class="section-header">
-    <div class="section-num">9</div>
-    <div class="section-title">Check-in, toegang & sleutels</div>
-  </div>
+  <div class="section-header"><div class="section-num">7</div><div class="section-title">Check-in, toegang & sleutels</div></div>
   <div class="section-body">
     <div class="field">
       <label>Gewenste check-in methode <span class="req">*</span></label>
@@ -1045,7 +550,7 @@
       </div>
     </div>
     <div class="field">
-      <label>Toegangscode urbanisatiepoort (indien van toepassing)</label>
+      <label>Toegangscode urbanisatiepoort</label>
       <input type="text" name="poortcode" placeholder="bijv. #1234 of pincode">
     </div>
     <div class="field">
@@ -1053,15 +558,8 @@
       <input type="number" name="sleutel_sets" min="1" placeholder="bijv. 3">
     </div>
     <div class="field full">
-      <label>Noodprocedure bij lockout (wie bellen gasten buiten kantooruren?)</label>
-      <textarea name="nood_lockout" rows="2" placeholder="bijv. Naam + telefoonnummer noodcontact"></textarea>
-    </div>
-    <div class="field full">
-      <label>Bestaande check-in instructies beschikbaar? (bijv. voor urbanisatie, toegangspoorten)</label>
-      <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="checkin_instructies" value="Ja, aanleveren"> Ja, aanleveren</label>
-        <label class="radio-item"><input type="radio" name="checkin_instructies" value="Nee"> Nee</label>
-      </div>
+      <label>Noodprocedure bij lockout</label>
+      <textarea name="nood_lockout" rows="2" placeholder="bijv. naam + telefoonnummer noodcontact"></textarea>
     </div>
     <div class="field full">
       <label>Huisregels opgesteld?</label>
@@ -1070,293 +568,180 @@
         <label class="radio-item"><input type="radio" name="huisregels" value="Nee (Casa Care stelt op)"> Nee, Casa Care stelt op</label>
       </div>
     </div>
-    <div class="field full">
-      <label>Handleidingen voor apparatuur aanwezig? (airco, oven, TV, etc.)</label>
-      <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="handleidingen" value="Ja, aanleveren"> Ja, aanleveren</label>
-        <label class="radio-item"><input type="radio" name="handleidingen" value="Nee"> Nee</label>
-      </div>
-    </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- 10. SCHOONMAAK & LINNEN -->
-<!-- ═══════════════════════════════════════════ -->
+<!-- ══════════════════════════ 8. SCHOONMAAK & LINNEN ══════════════════════════ -->
 <div class="section">
-  <div class="section-header">
-    <div class="section-num">10</div>
-    <div class="section-title">Schoonmaak & linnen</div>
-  </div>
+  <div class="section-header"><div class="section-num">8</div><div class="section-title">Schoonmaak & linnen</div></div>
   <div class="section-body">
-    <div class="field">
-      <label>Vast schoonmaakteam aanwezig?</label>
-      <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="schoonmaak_team" value="Ja" id="sm_ja"> Ja</label>
-        <label class="radio-item"><input type="radio" name="schoonmaak_team" value="Nee"> Nee</label>
-      </div>
-    </div>
-    <div class="field" id="sm_contact" style="display:none;">
-      <label>Contactgegevens schoonmaakteam (Naam, Tel, Email)</label>
-      <textarea name="schoonmaak_contact" rows="2"></textarea>
-    </div>
-    <div class="field full">
-      <label>Wilt u dat Casa Care de schoonmaak volledig verzorgt?</label>
-      <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="schoonmaak_casacare" value="Ja, volledige verzorging"> Ja, volledige verzorging</label>
-        <label class="radio-item"><input type="radio" name="schoonmaak_casacare" value="Nee, eigen team (Casa Care coördineert)"> Nee, eigen team</label>
-        <label class="radio-item"><input type="radio" name="schoonmaak_casacare" value="In overleg"> In overleg</label>
-      </div>
-    </div>
-    <div class="field">
-      <label>Voldoende beddengoed aanwezig (min. 3 sets per bed)?</label>
-      <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="beddengoed" value="Ja"> Ja</label>
-        <label class="radio-item"><input type="radio" name="beddengoed" value="Nee (Casa Care regelt)"> Nee</label>
-      </div>
-    </div>
-    <div class="field">
-      <label>Voldoende handdoeken (bad, strand, keuken)?</label>
-      <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="handdoeken" value="Ja"> Ja</label>
-        <label class="radio-item"><input type="radio" name="handdoeken" value="Nee (Casa Care regelt)"> Nee</label>
-      </div>
-    </div>
-  </div>
-</div>
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- 11. PRIJSSTRATEGIE & FINANCIËN -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="section">
-  <div class="section-header">
-    <div class="section-num">11</div>
-    <div class="section-title">Prijsstrategie & financiën</div>
-  </div>
-  <div class="section-body">
-    <div class="field full">
-      <label>Hoofddoel van de verhuur</label>
-      <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="verhuur_doel" value="Maximale bezetting"> Maximale bezetting</label>
-        <label class="radio-item"><input type="radio" name="verhuur_doel" value="Maximale opbrengst"> Maximale opbrengst</label>
-        <label class="radio-item"><input type="radio" name="verhuur_doel" value="Evenwicht bezetting/opbrengst"> Evenwicht</label>
-        <label class="radio-item"><input type="radio" name="verhuur_doel" value="Vaste lasten dekken (hypotheek/VvE)"> Vaste lasten dekken</label>
-        <label class="radio-item"><input type="radio" name="verhuur_doel" value="Passief inkomen genereren"> Passief inkomen</label>
+    <div class="schoonmaak-box">
+      <h4>Wat is inbegrepen bij elke turnover</h4>
+      <p style="font-size:13px; color: rgba(253,251,248,0.7); margin-bottom:4px;">Na elk verblijf zorgen wij voor een grondige reiniging van uw woning. Dit is wat er standaard bij inbegrepen is:</p>
+      <div class="schoonmaak-grid">
+        <div class="schoonmaak-item">
+          <strong>Binnen</strong>
+          <p>Alle ruimtes worden schoongemaakt en gedesinfecteerd — inclusief keuken, badkamer(s), slaapkamers en woonkamer. Apparaten zoals koelkast, oven, magnetron en kasten worden van binnen en buiten gereinigd. Matrassen en meubels worden gestoomd met een industriële stoomreiniger. Vochtgeuren worden aangepakt.</p>
+        </div>
+        <div class="schoonmaak-item">
+          <strong>Buiten</strong>
+          <p>Terrassen en balkons worden schoongemaakt en netjes achtergelaten.</p>
+        </div>
+        <div class="schoonmaak-item">
+          <strong>Ramen</strong>
+          <p>Alle ramen worden aan de binnenkant gereinigd. Grote raampartijen vallen onder een apart tarief.</p>
+        </div>
       </div>
     </div>
-    <div class="field">
-      <label>Minimale verblijfsduur (nachten)</label>
-      <input type="number" name="min_verblijf" min="1" placeholder="bijv. 7">
-    </div>
-    <div class="field">
-      <label>Maximale verblijfsduur (nachten)</label>
-      <input type="number" name="max_verblijf" min="1" placeholder="bijv. 30 (leeg = onbeperkt)">
-    </div>
-    <div class="field">
-      <label>Kortingen voor week-/maandverhuur?</label>
-      <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="kortingen" value="Ja"> Ja</label>
-        <label class="radio-item"><input type="radio" name="kortingen" value="Nee"> Nee</label>
-        <label class="radio-item"><input type="radio" name="kortingen" value="In overleg"> In overleg</label>
-      </div>
-    </div>
-    <div class="field full">
-      <label>Zijn er al bekende seizoensprijzen of akkoord met Dynamic Pricing?</label>
-      <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="dynamic_pricing" value="Akkoord Dynamic Pricing"> Akkoord Dynamic Pricing</label>
-        <label class="radio-item"><input type="radio" name="dynamic_pricing" value="Eigen vaste prijzen (aanleveren)"> Eigen vaste prijzen</label>
-        <label class="radio-item"><input type="radio" name="dynamic_pricing" value="In overleg"> In overleg</label>
-      </div>
-    </div>
-    <div class="field">
-      <label>Hoogte van de borg voor gasten (€)</label>
-      <input type="number" name="borg_hoogte" min="0" placeholder="bijv. 300">
-    </div>
-    <div class="info-box" style="grid-column: 1 / -1;">
-      💶 <strong>Uitbetaling & facturering:</strong> Casa Care rekent maandelijks af. U ontvangt elke maand een overzicht van de huuropbrengsten en gemaakte kosten, gevolgd door de uitbetaling op het opgegeven IBAN.
-    </div>
-    <div class="field">
-      <label>Drempel voor zelfstandige reparaties door Casa Care (€)
-        <span class="note">Boven dit bedrag overlegt Casa Care eerst met u</span>
-      </label>
-      <input type="number" name="reparatie_drempel" min="0" placeholder="bijv. 150">
-    </div>
-    <div class="field">
-      <label>Wie draagt toeristenbelasting (IVTNU/tasa turística) af?
-        <span class="note">Afhankelijk van de gemeente</span>
-      </label>
-      <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="toeristenbelasting" value="Casa Care int en draagt af"> Casa Care</label>
-        <label class="radio-item"><input type="radio" name="toeristenbelasting" value="Eigenaar"> Eigenaar</label>
-        <label class="radio-item"><input type="radio" name="toeristenbelasting" value="N.v.t."> N.v.t.</label>
-        <label class="radio-item"><input type="radio" name="toeristenbelasting" value="In overleg"> In overleg</label>
-      </div>
-    </div>
-    <div class="field full">
-      <label>Annuleringsvoorwaarden</label>
-      <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="annulering" value="Standaard Casa Care"> Standaard Casa Care</label>
-        <label class="radio-item"><input type="radio" name="annulering" value="Eigen voorwaarden (aanleveren)"> Eigen voorwaarden</label>
-      </div>
-    </div>
-    <div class="field full">
-      <label>Akkoord dat schade door gasten primair op de gast/verzekering wordt verhaald? <span class="req">*</span></label>
-      <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="schade_akkoord" value="Ja" required> Ja</label>
-        <label class="radio-item"><input type="radio" name="schade_akkoord" value="Nee"> Nee</label>
-        <label class="radio-item"><input type="radio" name="schade_akkoord" value="In overleg"> In overleg</label>
-      </div>
-    </div>
-  </div>
-</div>
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- 12. FOTO'S & PRESENTATIE -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="section">
-  <div class="section-header">
-    <div class="section-num">12</div>
-    <div class="section-title">Foto's & presentatie</div>
-  </div>
-  <div class="section-body">
-    <div class="field">
-      <label>Bestaande foto's beschikbaar en bruikbaar?</label>
-      <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="fotos_beschikbaar" value="Ja"> Ja</label>
-        <label class="radio-item"><input type="radio" name="fotos_beschikbaar" value="Nee"> Nee</label>
-        <label class="radio-item"><input type="radio" name="fotos_beschikbaar" value="Deels"> Deels</label>
-      </div>
-    </div>
-    <div class="field">
-      <label>Toestemming voor nieuwe professionele foto's?</label>
-      <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="fotos_nieuw" value="Ja"> Ja</label>
-        <label class="radio-item"><input type="radio" name="fotos_nieuw" value="Nee"> Nee</label>
-      </div>
-    </div>
-    <div class="field full">
-      <label>Video of drone-opnames gewenst?</label>
-      <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="drone" value="Ja"> Ja</label>
-        <label class="radio-item"><input type="radio" name="drone" value="Nee"> Nee</label>
-        <label class="radio-item"><input type="radio" name="drone" value="In overleg"> In overleg</label>
-      </div>
-    </div>
-    <div class="field full">
-      <label>Wat maakt de woning uniek?
-        <span class="note">Bijv. zeezicht, privézwembad op het zuiden, luxe renovatie, loopafstand strand</span>
-      </label>
-      <textarea name="uniek_selling_points" rows="3"></textarea>
-    </div>
-    <div class="field full">
-      <label>Top 3 onderscheidende kenmerken t.o.v. andere woningen in de regio</label>
-      <textarea name="top3_kenmerken" rows="3" placeholder="1. …&#10;2. …&#10;3. …"></textarea>
-    </div>
-    <div class="field full">
-      <label>Welke sfeer moeten gasten ervaren?
-        <span class="note">bijv. rust, luxe, gezelligheid, minimalistisch, family-proof</span>
-      </label>
-      <input type="text" name="sfeer" placeholder="bijv. luxe en ontspanning, ver weg van alles">
-    </div>
-    <div class="field full">
-      <label>Verbeterpunten / aanpassingen vóór livegang</label>
-      <textarea name="verbeterpunten" rows="3" placeholder="bijv. nieuwe buitenmeubelen nodig, schilderwerk badkamer..."></textarea>
-    </div>
-    <div class="field full">
-      <label>Akkoord met kleine styling-aanpassingen voor betere presentatie?</label>
-      <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="styling_akkoord" value="Ja"> Ja</label>
-        <label class="radio-item"><input type="radio" name="styling_akkoord" value="Nee"> Nee</label>
-        <label class="radio-item"><input type="radio" name="styling_akkoord" value="In overleg"> In overleg</label>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- 13. EXTRA DIENSTEN & UPSELLS -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="section">
-  <div class="section-header">
-    <div class="section-num">13</div>
-    <div class="section-title">Extra diensten & upsells</div>
-  </div>
-  <div class="section-body">
-    <div class="field full">
-      <label>Welkomstpakket voor gasten?</label>
-      <div class="radio-group">
-        <label class="radio-item"><input type="radio" name="welkomstpakket" value="Level 1 – Comfort (€20)"> Level 1 – Comfort (€20): water, koffie/thee, koekjes, basisverbruik</label>
-        <label class="radio-item"><input type="radio" name="welkomstpakket" value="Level 2 – Premium (€32,50)"> Level 2 – Premium (€32,50): + cava/wijn, vers fruit, gastbrief</label>
-        <label class="radio-item"><input type="radio" name="welkomstpakket" value="Level 3 – Luxe VIP (€50)"> Level 3 – Luxe VIP (€50): + Iberico hapjes, lokaal product, kaarsje</label>
-        <label class="radio-item"><input type="radio" name="welkomstpakket" value="Zelf samengesteld (+10%)"> Zelf samengesteld (inkoopkosten +10%)</label>
-        <label class="radio-item"><input type="radio" name="welkomstpakket" value="Nee"> Geen welkomstpakket</label>
-      </div>
-    </div>
-    <div class="field full">
-      <label>Ontbijt aan huis aanbieden aan gasten? (€22,50 p.p.)</label>
-      <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="ontbijt" value="Ja"> Ja</label>
-        <label class="radio-item"><input type="radio" name="ontbijt" value="Nee"> Nee</label>
-      </div>
-    </div>
-    <div class="field full">
-      <label>Open voor extra upsells? (late check-out, babybedje, extra schoonmaak, etc.)</label>
-      <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="upsells" value="Ja"> Ja</label>
-        <label class="radio-item"><input type="radio" name="upsells" value="Nee"> Nee</label>
-        <label class="radio-item"><input type="radio" name="upsells" value="In overleg"> In overleg</label>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- 14. ONDERHOUD & STORINGEN -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="section">
-  <div class="section-header">
-    <div class="section-num">14</div>
-    <div class="section-title">Onderhoud & storingen</div>
-  </div>
-  <div class="section-body">
-    <div class="field">
-      <label>Vaste klusjesman/technicus behouden?</label>
-      <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="klusjesman" value="Ja" id="klus_ja"> Ja</label>
-        <label class="radio-item"><input type="radio" name="klusjesman" value="Nee (Casa Care partners)"> Nee</label>
-      </div>
-    </div>
-    <div class="field" id="klus_contact" style="display:none;">
-      <label>Contactgegevens klusjesman (Naam, Tel, Email)</label>
-      <textarea name="klusjesman_contact" rows="2"></textarea>
-    </div>
     <div class="info-box">
-      🔧 <strong>Onderhoudskosten:</strong> Alle kosten voor reparaties en onderhoud worden door Casa Care gecoördineerd en maandelijks doorbelast aan de eigenaar via de maandelijkse afrekening. U hoeft hier verder niets voor te regelen.
+      🧹 <strong>Linnen & handdoeken:</strong> Casa Care verzorgt het schoonmaaklinnen volledig. Wij brengen professioneel linnen en handdoeken mee bij elke beurt. U hoeft hier zelf niets voor te regelen. Indien u eigen linnen wil gebruiken, rekenen wij €5 extra per persoon voor het reinigen daarvan. Voor eigen linnen geldt een minimum van 3 complete sets per bed (€25 per persoon per pakket).
     </div>
+
     <div class="field full">
-      <label>Lopende gebreken, aandachtspunten of specifieke instructies voor apparatuur</label>
-      <textarea name="gebreken" rows="3" placeholder="bijv. 'boiler lekt soms bij hoge druk', 'sleutel van terraspoort stijf'..."></textarea>
+      <label>Gaat u akkoord met de linnen- en schoonmaakservice van Casa Care? <span class="req">*</span></label>
+      <div class="radio-group inline">
+        <label class="radio-item"><input type="radio" name="linnen_akkoord" value="Ja, akkoord met Casa Care linnen" required> Ja, akkoord met Casa Care linnen</label>
+        <label class="radio-item"><input type="radio" name="linnen_akkoord" value="Nee, eigen linnen (€5 p.p. extra)"> Nee, eigen linnen (€5 p.p. extra)</label>
+      </div>
+    </div>
+
+    <div class="field full">
+      <label>Speciale schoonmaakinstructies of aandachtspunten</label>
+      <textarea name="schoonmaak_instructies" rows="3" placeholder="bijv. vloerkleed niet nat maken, terras extra aandacht..."></textarea>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- 15. COMMUNICATIE & VERWACHTINGEN -->
-<!-- ═══════════════════════════════════════════ -->
+<!-- ══════════════════════════ 9. PAKKETKEUZE ══════════════════════════ -->
 <div class="section">
-  <div class="section-header">
-    <div class="section-num">15</div>
-    <div class="section-title">Communicatie & verwachtingen</div>
-  </div>
+  <div class="section-header"><div class="section-num">9</div><div class="section-title">Keuze verhuurpakket</div></div>
   <div class="section-body">
     <div class="field full">
-      <label>Algemeen doel met de verhuur</label>
-      <textarea name="algemeen_doel" rows="2" placeholder="bijv. investering terugverdienen, kosten en hypotheek dekken, passief inkomen genereren, maximale bezettingsgraad..."></textarea>
+      <label>Welk pakket past het beste bij u? <span class="req">*</span>
+        <span class="note">Klik op een pakket om het te selecteren</span>
+      </label>
     </div>
+    <div class="pakket-grid">
+
+      <!-- Performance -->
+      <div class="pakket-card" id="card_performance" onclick="selectPakket('performance')">
+        <input type="radio" name="pakket" value="Performance" id="pakket_performance" required>
+        <div class="pakket-header">
+          <div>
+            <div class="pakket-badge">Performance</div>
+            <div class="pakket-name">Performance</div>
+          </div>
+          <div class="pakket-price">20%<span>Ex. IVA</span></div>
+        </div>
+        <div class="pakket-desc">Wij nemen de volledige verhuur uit handen: van platformbeheer tot gastcommunicatie, check-in/out, schoonmaak en linnen. U geniet van uw opbrengst zonder omkijken.</div>
+        <ul class="pakket-features">
+          <li>Volledige overname en optimalisatie van alle boekingsplatformen (Airbnb, Booking.com, VRBO)</li>
+          <li>Beheer van reserveringen en gastcommunicatie</li>
+          <li>Check-in & check-out service (persoonlijk)</li>
+          <li>Coördinatie van schoonmaak en kwaliteitscontrole</li>
+          <li>Coördinatie linnenservice (halen, brengen, wassen)</li>
+          <li>Gebruik van schoonmaakmiddelen</li>
+          <li>Toezicht op de woning en signalering van bijzonderheden</li>
+          <li>Periodieke controles/bezoeken (1x per maand)</li>
+          <li>Actieve optimalisatie van prijzen en bezetting</li>
+          <li>Professionele fotografie</li>
+          <li>Persoonlijke gastengids (digitaal, op maat)</li>
+          <li>Kwartaalrapportage met marktinzichten</li>
+          <li>SES Hospedajes gastenregistratie</li>
+          <li>Woninginspectie bij elke check-out</li>
+          <li>Direct en persoonlijk contact met u als eigenaar</li>
+        </ul>
+      </div>
+
+      <!-- Signature -->
+      <div class="pakket-card" id="card_signature" onclick="selectPakket('signature')">
+        <input type="radio" name="pakket" value="Signature" id="pakket_signature">
+        <div class="pakket-header">
+          <div>
+            <div class="pakket-badge" style="background: var(--deep);">Signature</div>
+            <div class="pakket-name">Signature</div>
+          </div>
+          <div class="pakket-price">25%<span>Ex. IVA</span></div>
+        </div>
+        <div class="pakket-desc">Alles uit het Performance pakket, aangevuld met premium extras die uw woning naar het hoogste niveau tillen. Korting op schoonmaak, premium fotografie en hands-on onderhoud.</div>
+        <ul class="pakket-features">
+          <li>Alles uit het Performance pakket</li>
+          <li>Linnenset inbegrepen</li>
+          <li>Premium fotografie (upgrade incl. videocontent)</li>
+          <li>20% korting op schoonmaak (€20/uur i.p.v. €25/uur)</li>
+          <li>Één dieptereiniging per jaar inbegrepen</li>
+          <li>Regelmatige controle van de staat van het pand</li>
+          <li>6 uur onderhoud aan de woning per jaar inbegrepen</li>
+          <li>Signature-toiletartikelen (shampoo, douchegel, conditioner, bodylotion en handzeep) voor een hotelervaring</li>
+          <li>Proactieve review-optimalisatie</li>
+          <li>Prioritaire klantenservice</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════ 10. ONDERHOUD ══════════════════════════ -->
+<div class="section">
+  <div class="section-header"><div class="section-num">10</div><div class="section-title">Onderhoud & storingen</div></div>
+  <div class="section-body">
+    <div class="info-box">
+      🔧 <strong>Onderhoud via Casa Care:</strong> Wij werken met onze eigen vaste vakmensen. Voorafgaand aan elke opdracht ontvangt u via ons platform een duidelijke prijsopgave. Pas na uw akkoord wordt de opdracht uitgevoerd. Alle kosten worden maandelijks doorbelast.
+    </div>
+    <div class="field full">
+      <label>Lopende gebreken of aandachtspunten
+        <span class="note">Meld hier bekende gebreken zodat wij dit direct kunnen oppakken</span>
+      </label>
+      <textarea name="gebreken" rows="3" placeholder="bijv. boiler lekt soms bij hoge druk, schuifpui terras gaat stroef..."></textarea>
+    </div>
+    <div class="field full">
+      <label>Specifieke instructies voor apparatuur</label>
+      <textarea name="apparatuur_instructies" rows="2" placeholder="bijv. zwembadpomp in berging, alarmcode is 1234..."></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════ 11. SENMO SENSOREN ══════════════════════════ -->
+<div class="section">
+  <div class="section-header"><div class="section-num">11</div><div class="section-title">Slim woningtoezicht via Senmo</div></div>
+  <div class="section-body">
+    <div class="info-box">
+      📡 <strong>Wat is Senmo?</strong> Senmo is een IoT-monitoringplatform speciaal voor tweede woningen en verhuurpanden. Via slimme sensoren krijgt u — en Casa Care als uw beheerder — real-time inzicht in alles wat er in uw woning gebeurt, ook als u er niet bent.<br><br>
+      <strong>Wat meten de sensoren?</strong>
+      <ul>
+        <li>Energieverbruik (elektriciteit & water) — ongewoon verbruik wordt direct gesignaleerd</li>
+        <li>Waterlekken — voorkomt schade door tijdige melding</li>
+        <li>Rook- en CO₂-detectie — directe alert bij brand of gevaarlijke situaties</li>
+        <li>Geluidsniveaus — handig bij stiltepolicy en het voorkomen van overlast</li>
+        <li>Beweging & bezetting — u weet altijd of uw woning bezet of leeg is</li>
+        <li>Temperatuur & luchtvochtigheid — beschermt uw interieur en inventaris</li>
+        <li>Open ramen/deuren bij vertrek — melding als gasten vergeten iets te sluiten</li>
+      </ul>
+      <br>
+      <strong>Waarom handig?</strong> Als beheerder kan Casa Care direct actie ondernemen bij een melding, zonder dat u zelf hoeft in te grijpen. Energiekosten kunnen exact worden doorbelast aan gasten. U betaalt nooit te veel en heeft altijd bewijs.
+    </div>
+    <div class="field full">
+      <label>Heeft u interesse in het gebruik van Senmo-sensoren in uw woning? <span class="req">*</span></label>
+      <div class="radio-group inline">
+        <label class="radio-item"><input type="radio" name="senmo" value="Ja, ik wil meer informatie" required> Ja, ik wil meer informatie</label>
+        <label class="radio-item"><input type="radio" name="senmo" value="Nee, niet geïnteresseerd"> Nee, niet geïnteresseerd</label>
+        <label class="radio-item"><input type="radio" name="senmo" value="Misschien, later bespreken"> Misschien, later bespreken</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════ 12. COMMUNICATIE ══════════════════════════ -->
+<div class="section">
+  <div class="section-header"><div class="section-num">12</div><div class="section-title">Communicatie & verwachtingen</div></div>
+  <div class="section-body">
     <div class="field full">
       <label>Mate van betrokkenheid bij dagelijks beheer <span class="req">*</span></label>
       <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="betrokkenheid" value="Niet betrokken (volledig ontzorgd)" required> Volledig ontzorgd</label>
+        <label class="radio-item"><input type="radio" name="betrokkenheid" value="Volledig ontzorgd" required> Volledig ontzorgd</label>
         <label class="radio-item"><input type="radio" name="betrokkenheid" value="Beperkt (alleen bij grote zaken)"> Beperkt</label>
         <label class="radio-item"><input type="radio" name="betrokkenheid" value="Actief (regelmatig overleg)"> Actief betrokken</label>
       </div>
@@ -1364,7 +749,7 @@
     <div class="field">
       <label>Bereikbaarheid bij urgente situaties</label>
       <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="bereikbaarheid" value="Direct (via telefoon)"> Direct (telefoon)</label>
+        <label class="radio-item"><input type="radio" name="bereikbaarheid" value="Direct (telefoon)"> Direct (telefoon)</label>
         <label class="radio-item"><input type="radio" name="bereikbaarheid" value="Binnen enkele uren"> Binnen enkele uren</label>
         <label class="radio-item"><input type="radio" name="bereikbaarheid" value="Binnen 24 uur"> Binnen 24 uur</label>
       </div>
@@ -1386,14 +771,6 @@
       </div>
     </div>
     <div class="field full">
-      <label>Akkoord met actieve optimalisaties door Casa Care om prestaties te verbeteren? <span class="req">*</span></label>
-      <div class="radio-group inline">
-        <label class="radio-item"><input type="radio" name="optimalisatie_akkoord" value="Ja" required> Ja</label>
-        <label class="radio-item"><input type="radio" name="optimalisatie_akkoord" value="Nee"> Nee</label>
-        <label class="radio-item"><input type="radio" name="optimalisatie_akkoord" value="In overleg"> In overleg</label>
-      </div>
-    </div>
-    <div class="field full">
       <label>Gewenste startdatum samenwerking</label>
       <input type="date" name="startdatum">
     </div>
@@ -1412,9 +789,7 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════ -->
 <!-- SUBMIT -->
-<!-- ═══════════════════════════════════════════ -->
 <div class="submit-area">
   <p>Door dit formulier te verzenden gaat u akkoord dat Casa Care Costa Blanca de opgegeven gegevens verwerkt ten behoeve van het beheer van uw woning. Uw gegevens worden niet gedeeld met derden.</p>
   <button type="submit" class="btn-submit" id="submitBtn">Formulier verzenden</button>
@@ -1422,103 +797,54 @@
 
 </form>
 </div>
-
 <div class="toast" id="toast"></div>
 
 <script>
-// ── Progress tracker ──────────────────────────────
-function updateProgress() {
-  const required = document.querySelectorAll('[required]');
-  let filled = 0;
-  required.forEach(el => {
-    if (el.type === 'radio' || el.type === 'checkbox') {
-      const group = document.querySelectorAll(`[name="${el.name}"]:checked`);
-      if (group.length > 0) filled++;
-    } else if (el.value.trim()) filled++;
-  });
-  // Deduplicate radio groups
-  const radioNames = new Set();
-  let totalRadioGroups = 0;
-  document.querySelectorAll('input[type="radio"][required]').forEach(el => {
-    if (!radioNames.has(el.name)) { radioNames.add(el.name); totalRadioGroups++; }
-  });
-  const textRequired = document.querySelectorAll('input:not([type="radio"]):not([type="checkbox"])[required], textarea[required], select[required]').length;
-  const total = totalRadioGroups + textRequired;
+// ── Pakket selectie ───────────────────────────────
+function selectPakket(naam) {
+  document.querySelectorAll('.pakket-card').forEach(c => c.classList.remove('selected'));
+  document.getElementById('card_' + naam).classList.add('selected');
+  document.getElementById('pakket_' + naam).checked = true;
+  updateProgress();
+}
 
-  let pct = total ? Math.round((filled / total) * 100) : 0;
-  pct = Math.min(pct, 100);
+// ── Progress ──────────────────────────────────────
+function updateProgress() {
+  const radioNames = new Set();
+  let radioFilled = 0;
+  document.querySelectorAll('input[type="radio"][required]').forEach(el => radioNames.add(el.name));
+  radioNames.forEach(name => { if (document.querySelector(`[name="${name}"]:checked`)) radioFilled++; });
+  let textFilled = 0;
+  const textRequired = document.querySelectorAll('input:not([type="radio"]):not([type="checkbox"])[required], textarea[required], select[required]');
+  textRequired.forEach(el => { if (el.value.trim()) textFilled++; });
+  const total = radioNames.size + textRequired.length;
+  const pct = total ? Math.min(Math.round(((radioFilled + textFilled) / total) * 100), 100) : 0;
   document.getElementById('progressBar').style.width = pct + '%';
   document.getElementById('progressText').textContent = pct + '% ingevuld';
 }
 document.getElementById('intakeForm').addEventListener('input', updateProgress);
 document.getElementById('intakeForm').addEventListener('change', updateProgress);
 
-// ── Conditional visibility ────────────────────────
-function toggleShow(triggerSel, targetId, matchVal) {
-  const triggers = document.querySelectorAll(triggerSel);
-  const target = document.getElementById(targetId);
-  if (!target) return;
-  triggers.forEach(t => {
-    t.addEventListener('change', () => {
-      const checked = document.querySelector(triggerSel + ':checked');
-      target.style.display = (checked && (matchVal ? checked.value === matchVal : true)) ? 'block' : 'none';
-    });
-  });
-}
-
-// Wifi
+// ── Conditional fields ────────────────────────────
 document.querySelectorAll('[name="wifi"]').forEach(r => r.addEventListener('change', () => {
-  document.getElementById('wifi_details').style.display =
-    document.querySelector('[name="wifi"]:checked')?.value === 'Ja' ? 'block' : 'none';
+  document.getElementById('wifi_details').style.display = document.querySelector('[name="wifi"]:checked')?.value === 'Ja' ? 'block' : 'none';
 }));
-// Licentie
 document.querySelectorAll('[name="licentie"]').forEach(r => r.addEventListener('change', () => {
   const v = document.querySelector('[name="licentie"]:checked')?.value;
   document.getElementById('lic_nummer_wrap').style.display = v === 'Ja' ? 'block' : 'none';
-  document.getElementById('lic_datum_wrap').style.display  = v === 'Ja' ? 'block' : 'none';
+  document.getElementById('lic_datum_wrap').style.display = v === 'Ja' ? 'block' : 'none';
 }));
-// VvE
 document.querySelectorAll('[name="vve_beperking"]').forEach(r => r.addEventListener('change', () => {
-  document.getElementById('vve_toelichting').style.display =
-    document.querySelector('[name="vve_beperking"]:checked')?.value === 'Ja' ? 'block' : 'none';
+  document.getElementById('vve_toelichting').style.display = document.querySelector('[name="vve_beperking"]:checked')?.value === 'Ja' ? 'block' : 'none';
 }));
-// SES
-document.querySelectorAll('[name="ses"]').forEach(r => r.addEventListener('change', () => {
-  document.getElementById('ses_details_wrap').style.display =
-    document.querySelector('[name="ses"]:checked')?.value === 'Ja' ? 'block' : 'none';
-}));
-// Al online
-document.querySelectorAll('[name="al_online"]').forEach(r => r.addEventListener('change', () => {
-  const v = document.querySelector('[name="al_online"]:checked')?.value;
-  ['bestaande_platformen','bestaande_reviews','toegang_listings'].forEach(id => {
-    document.getElementById(id).style.display = v === 'Ja' ? 'block' : 'none';
-  });
-}));
-// PMS
-document.querySelectorAll('[name="pms"]').forEach(r => r.addEventListener('change', () => {
-  document.getElementById('pms_welk').style.display =
-    document.querySelector('[name="pms"]:checked')?.value === 'Ja' ? 'block' : 'none';
-}));
-// Eigen gebruik
+// SES velden altijd zichtbaar — geen toggle nodig
 document.querySelectorAll('[name="eigen_gebruik"]').forEach(r => r.addEventListener('change', () => {
   const v = document.querySelector('[name="eigen_gebruik"]:checked')?.value;
-  document.getElementById('eigen_gebruik_details').style.display = v === 'Ja' ? 'block' : 'none';
-  document.getElementById('blokkeer_periodes_wrap').style.display = v === 'Ja' ? 'block' : 'none';
+  document.getElementById('eigen_gebruik_weken').style.display = v === 'Ja' ? 'block' : 'none';
+  document.getElementById('eigen_gebruik_periodes').style.display = v === 'Ja' ? 'block' : 'none';
 }));
-// Sleutelkluis
 document.querySelectorAll('[name="sleutelkluis"]').forEach(r => r.addEventListener('change', () => {
-  document.getElementById('kluis_code_wrap').style.display =
-    document.querySelector('[name="sleutelkluis"]:checked')?.value === 'Ja' ? 'block' : 'none';
-}));
-// Schoonmaak team
-document.querySelectorAll('[name="schoonmaak_team"]').forEach(r => r.addEventListener('change', () => {
-  document.getElementById('sm_contact').style.display =
-    document.querySelector('[name="schoonmaak_team"]:checked')?.value === 'Ja' ? 'block' : 'none';
-}));
-// Klusjesman
-document.querySelectorAll('[name="klusjesman"]').forEach(r => r.addEventListener('change', () => {
-  document.getElementById('klus_contact').style.display =
-    document.querySelector('[name="klusjesman"]:checked')?.value === 'Ja' ? 'block' : 'none';
+  document.getElementById('kluis_code_wrap').style.display = document.querySelector('[name="sleutelkluis"]:checked')?.value === 'Ja' ? 'block' : 'none';
 }));
 
 // ── Toast ─────────────────────────────────────────
@@ -1529,16 +855,13 @@ function showToast(msg, type) {
   setTimeout(() => t.className = 'toast', 4500);
 }
 
-// ── Collect all form data as readable text ────────
+// ── Collect form data ─────────────────────────────
 function collectFormData() {
   const form = document.getElementById('intakeForm');
   const data = {};
-  const elements = form.elements;
   const seen = new Set();
-
-  for (let el of elements) {
+  for (let el of form.elements) {
     if (!el.name || seen.has(el.name)) continue;
-
     if (el.type === 'radio') {
       seen.add(el.name);
       const checked = form.querySelector(`[name="${el.name}"]:checked`);
@@ -1557,169 +880,107 @@ function collectFormData() {
 
 function formatEmail(data) {
   const labels = {
-    naam_eigenaar: 'Naam eigenaar', email_eigenaar: 'Email eigenaar',
-    telefoon_eigenaar: 'Telefoon', adres_eigenaar: 'Adres eigenaar',
-    nie_eigenaar: 'NIE/Paspoort', iban_eigenaar: 'IBAN',
-    fiscale_status: 'Fiscale status', factuur_gegevens: 'Factuurgegevens',
-    poder_notarial: 'Poder Notarial', belasting_aangifte: 'Belastingaangifte',
-    naam_verblijf: 'Naam verblijf', adres_woning: 'Adres woning',
-    type_woning: 'Type woning', bouwjaar: 'Bouwjaar/renovatie',
-    slaapkamers: 'Slaapkamers', badkamers: 'Badkamers',
-    max_gasten: 'Max gasten', oppervlakte_binnen: 'Oppervlakte binnen (m²)',
-    oppervlakte_buiten: 'Oppervlakte buiten (m²)', orientatie: 'Oriëntatie',
-    verdieping: 'Verdieping', lift: 'Lift',
-    parkeren: 'Parkeren', zwembad: 'Zwembad', airco: 'Airco/verwarming',
-    airco_type: 'Type airco', wifi: 'Wifi', wifi_code: 'Wifi-code',
-    voorzieningen: 'Overige voorzieningen',
-    afstand_strand: 'Afstand strand', afstand_luchthaven: 'Afstand luchthaven',
-    afstand_centrum: 'Afstand centrum/supermarkt', ov: 'OV bereikbaarheid',
-    locatie_uniek: 'Unieke locatie-kenmerken',
-    nra_nummer: 'NRA-nummer', licentie: 'Licencia turística',
-    licentie_nummer: 'Licentienummer', licentie_geldig_tot: 'Geldig tot',
-    energiecertificaat: 'Energiecertificaat', cedula: 'Cédula habitabilidad',
-    escritura: 'Escritura aanwezig', vve_beperking: 'VvE beperkingen',
-    vve_toelichting_tekst: 'VvE toelichting',
-    verzekering_verhuur: 'Verzekering verhuur', verzekering_liability: 'Liability verzekering',
-    ses: 'SES Hospedajes', ses_gegevens: 'SES gegevens',
-    certificado_digital: 'Certificado Digital', ses_hulp: 'Hulp SES registratie',
-    doelgroep: 'Doelgroep', niet_doelgroep: 'Niet gewenste doelgroep',
-    goedkeuring_boekingen: 'Boekingen goedkeuren', min_leeftijd: 'Min. leeftijd boeker',
-    huisdieren: 'Huisdieren', roken: 'Rookbeleid', feesten: 'Feesten toegestaan',
-    stiltepolicy: 'Stiltepolicy',
-    al_online: 'Al online', huidige_platformen: 'Huidige platformen',
-    reviews_beschikbaar: 'Reviews beschikbaar', toegang_listings: 'Toegang listings',
-    gewenste_platformen: 'Gewenste platformen', accounts_naam: 'Accounts op naam van',
-    pms: 'PMS aanwezig', pms_naam: 'PMS systeem',
-    hostaway_akkoord: 'Hostaway akkoord', hostaway_email: 'Hostaway email',
-    listing_talen: 'Listing talen',
-    eigen_gebruik: 'Eigen gebruik', eigen_gebruik_weken: 'Eigen gebruik (weken/jaar)',
-    blokkeer_periodes: 'Blokkeerperiodes', blokkeer_procedure: 'Blokkeer procedure',
-    sleutel_eigen_gebruik: 'Sleutelbeheer eigen gebruik',
-    checkin_methode: 'Check-in methode', sleutelkluis: 'Sleutelkluis',
-    sleutelkluis_code: 'Sleutelkluis code', smart_lock: 'Smart lock',
-    poortcode: 'Poortcode urbanisatie', sleutel_sets: 'Aantal sleutelsets',
-    nood_lockout: 'Noodprocedure lockout', checkin_instructies: 'Check-in instructies',
-    huisregels: 'Huisregels', handleidingen: 'Handleidingen apparatuur',
-    schoonmaak_team: 'Schoonmaakteam', schoonmaak_contact: 'Schoonmaak contact',
-    schoonmaak_casacare: 'Schoonmaak door Casa Care',
-    beddengoed: 'Beddengoed', handdoeken: 'Handdoeken',
-    verhuur_doel: 'Doel verhuur', min_verblijf: 'Min. verblijf (nachten)',
-    max_verblijf: 'Max. verblijf (nachten)', kortingen: 'Kortingen week/maand',
-    dynamic_pricing: 'Dynamic Pricing', borg_hoogte: 'Borg (€)',
-    uitbetaling: 'Uitbetalingsfrequentie', reparatie_drempel: 'Reparatiedrempel (€)',
-    toeristenbelasting: 'Toeristenbelasting', annulering: 'Annuleringsvoorwaarden',
-    schade_akkoord: 'Schade akkoord',
-    fotos_beschikbaar: "Foto's beschikbaar", fotos_nieuw: "Nieuwe foto's",
-    drone: 'Drone/video', uniek_selling_points: 'Unieke kenmerken',
-    top3_kenmerken: 'Top 3 kenmerken', sfeer: 'Gewenste sfeer',
-    verbeterpunten: 'Verbeterpunten', styling_akkoord: 'Styling akkoord',
-    welkomstpakket: 'Welkomstpakket', ontbijt: 'Ontbijt aanbod', upsells: 'Upsells',
-    klusjesman: 'Vaste klusjesman', klusjesman_contact: 'Klusjesman contact',
-    onderhoudskosten: 'Onderhoudskosten', gebreken: 'Gebreken/aandachtspunten',
-    algemeen_doel: 'Algemeen doel', betrokkenheid: 'Betrokkenheid beheer',
-    bereikbaarheid: 'Bereikbaarheid', rapportages: 'Rapportages frequentie',
-    auto_communicatie: 'Automatische communicatie', optimalisatie_akkoord: 'Optimalisatie akkoord',
-    startdatum: 'Startdatum samenwerking', verwachtingen: 'Verwachtingen',
-    succes_definitie: 'Succes definitie', opmerkingen: 'Opmerkingen'
+    naam_eigenaar:'Naam eigenaar', email_eigenaar:'Email', telefoon_eigenaar:'Telefoon',
+    adres_eigenaar:'Adres eigenaar', nie_eigenaar:'NIE/Paspoort', iban_eigenaar:'IBAN',
+    fiscale_status:'Fiscale status', belasting_aangifte:'Belastingaangifte', factuur_gegevens:'Factuurgegevens',
+    naam_verblijf:'Naam verblijf', adres_woning:'Adres woning', type_woning:'Type woning',
+    bouwjaar:'Bouwjaar', slaapkamers:'Slaapkamers', badkamers:'Badkamers',
+    max_gasten:'Max gasten', oppervlakte_binnen:'Opp. binnen (m²)', oppervlakte_buiten:'Opp. buiten (m²)',
+    orientatie:'Oriëntatie', verdieping:'Verdieping', lift:'Lift',
+    parkeren:'Parkeren', zwembad:'Zwembad', airco:'Airco/verwarming', airco_type:'Type airco',
+    wifi:'Wifi', wifi_code:'Wifi-code', voorzieningen:'Voorzieningen', voorzieningen_overig:'Overige voorzieningen',
+    afstand_strand:'Afstand strand', afstand_luchthaven:'Afstand luchthaven',
+    afstand_centrum:'Afstand centrum', ov:'OV bereikbaarheid', locatie_uniek:'Locatie uniek',
+    nra_nummer:'NRA-nummer', licentie:'Licencia turística', licentie_nummer:'Licentienummer',
+    licentie_geldig_tot:'Geldig tot', energiecertificaat:'Energiecertificaat',
+    cedula:'Cédula habitabilidad', vve_beperking:'VvE beperkingen', vve_toelichting_tekst:'VvE toelichting',
+    verzekering_verhuur:'Verzekering verhuur', verzekering_liability:'Liability verzekering',
+    ses_aanmelding:'SES aanmelding door Casa Care', ses_naam:'SES naam', ses_nie:'SES NIE',
+    ses_geboortedatum:'SES geboortedatum', ses_geslacht:'SES geslacht', ses_nationaliteit:'SES nationaliteit',
+    ses_telefoon:'SES telefoon', ses_adres:'SES adres',
+    eigen_gebruik:'Eigen gebruik', eigen_gebruik_weken_aantal:'Eigen gebruik (weken/jaar)',
+    blokkeer_periodes:'Vaste blokkeerperiodes', blokkeer_procedure:'Blokkeer procedure',
+    checkin_methode:'Check-in methode', sleutelkluis:'Sleutelkluis', sleutelkluis_code:'Sleutelkluis code',
+    smart_lock:'Smart lock', poortcode:'Poortcode', sleutel_sets:'Sleutelsets',
+    nood_lockout:'Noodprocedure', huisregels:'Huisregels',
+    linnen_akkoord:'Linnen akkoord', schoonmaak_instructies:'Schoonmaakinstructies',
+    pakket:'Gekozen pakket',
+    gebreken:'Gebreken', apparatuur_instructies:'Apparatuur instructies',
+    senmo:'Interesse Senmo sensoren',
+    betrokkenheid:'Betrokkenheid', bereikbaarheid:'Bereikbaarheid', rapportages:'Rapportages',
+    auto_communicatie:'Automatische communicatie', startdatum:'Startdatum',
+    verwachtingen:'Verwachtingen', succes_definitie:'Succes definitie', opmerkingen:'Opmerkingen'
   };
 
-  let body = `INTAKEFORMULIER CASA CARE COSTA BLANCA\n`;
-  body += `Ontvangen: ${new Date().toLocaleString('nl-NL')}\n`;
-  body += `${'='.repeat(60)}\n\n`;
-
+  let body = `INTAKEFORMULIER ALL-IN VERHUUR MANAGEMENT\nCasa Care Costa Blanca\nOntvangen: ${new Date().toLocaleString('nl-NL')}\n${'='.repeat(60)}\n\n`;
   const sections = [
-    { title: '1. PERSOONLIJKE GEGEVENS EIGENAAR', fields: ['naam_eigenaar','email_eigenaar','telefoon_eigenaar','adres_eigenaar','nie_eigenaar','iban_eigenaar','fiscale_status','factuur_gegevens','poder_notarial','belasting_aangifte'] },
-    { title: '2. GEGEVENS VAN DE WONING', fields: ['naam_verblijf','adres_woning','type_woning','bouwjaar','slaapkamers','badkamers','max_gasten','oppervlakte_binnen','oppervlakte_buiten','orientatie','verdieping','lift'] },
-    { title: '3. VOORZIENINGEN', fields: ['parkeren','zwembad','airco','airco_type','wifi','wifi_code','voorzieningen'] },
-    { title: '4. LOCATIE & OMGEVING', fields: ['afstand_strand','afstand_luchthaven','afstand_centrum','ov','locatie_uniek'] },
-    { title: '5. JURIDISCH & VERGUNNINGEN', fields: ['nra_nummer','licentie','licentie_nummer','licentie_geldig_tot','energiecertificaat','cedula','escritura','vve_beperking','vve_toelichting_tekst','verzekering_verhuur','verzekering_liability','ses','ses_gegevens','certificado_digital','ses_hulp'] },
-    { title: '6. DOELGROEP & POSITIONERING', fields: ['doelgroep','niet_doelgroep','goedkeuring_boekingen','min_leeftijd','huisdieren','roken','feesten','stiltepolicy'] },
-    { title: '7. PLATFORMEN & SYSTEMEN', fields: ['al_online','huidige_platformen','reviews_beschikbaar','toegang_listings','gewenste_platformen','accounts_naam','pms','pms_naam','hostaway_akkoord','hostaway_email','listing_talen'] },
-    { title: '8. EIGEN GEBRUIK & BLOKKERING', fields: ['eigen_gebruik','eigen_gebruik_weken','blokkeer_periodes','blokkeer_procedure','sleutel_eigen_gebruik'] },
-    { title: '9. CHECK-IN, TOEGANG & SLEUTELS', fields: ['checkin_methode','sleutelkluis','sleutelkluis_code','smart_lock','poortcode','sleutel_sets','nood_lockout','checkin_instructies','huisregels','handleidingen'] },
-    { title: '10. SCHOONMAAK & LINNEN', fields: ['schoonmaak_team','schoonmaak_contact','schoonmaak_casacare','beddengoed','handdoeken'] },
-    { title: '11. PRIJSSTRATEGIE & FINANCIËN', fields: ['verhuur_doel','min_verblijf','max_verblijf','kortingen','dynamic_pricing','borg_hoogte','uitbetaling','reparatie_drempel','toeristenbelasting','annulering','schade_akkoord'] },
-    { title: "12. FOTO'S & PRESENTATIE", fields: ['fotos_beschikbaar','fotos_nieuw','drone','uniek_selling_points','top3_kenmerken','sfeer','verbeterpunten','styling_akkoord'] },
-    { title: '13. EXTRA DIENSTEN & UPSELLS', fields: ['welkomstpakket','ontbijt','upsells'] },
-    { title: '14. ONDERHOUD & STORINGEN', fields: ['klusjesman','klusjesman_contact','onderhoudskosten','gebreken'] },
-    { title: '15. COMMUNICATIE & VERWACHTINGEN', fields: ['algemeen_doel','betrokkenheid','bereikbaarheid','rapportages','auto_communicatie','optimalisatie_akkoord','startdatum','verwachtingen','succes_definitie','opmerkingen'] }
+    { title: '1. PERSOONLIJKE GEGEVENS', fields: ['naam_eigenaar','email_eigenaar','telefoon_eigenaar','adres_eigenaar','nie_eigenaar','iban_eigenaar','fiscale_status','belasting_aangifte','factuur_gegevens'] },
+    { title: '2. WONING', fields: ['naam_verblijf','adres_woning','type_woning','bouwjaar','slaapkamers','badkamers','max_gasten','oppervlakte_binnen','oppervlakte_buiten','orientatie','verdieping','lift'] },
+    { title: '3. VOORZIENINGEN', fields: ['parkeren','zwembad','airco','airco_type','wifi','wifi_code','voorzieningen','voorzieningen_overig'] },
+    { title: '4. LOCATIE', fields: ['afstand_strand','afstand_luchthaven','afstand_centrum','ov','locatie_uniek'] },
+    { title: '5. JURIDISCH & SES', fields: ['nra_nummer','licentie','licentie_nummer','licentie_geldig_tot','energiecertificaat','cedula','vve_beperking','vve_toelichting_tekst','verzekering_verhuur','verzekering_liability','ses_aanmelding','ses_naam','ses_nie','ses_geboortedatum','ses_geslacht','ses_nationaliteit','ses_telefoon','ses_adres'] },
+    { title: '6. EIGEN GEBRUIK', fields: ['eigen_gebruik','eigen_gebruik_weken_aantal','blokkeer_periodes','blokkeer_procedure'] },
+    { title: '7. CHECK-IN & TOEGANG', fields: ['checkin_methode','sleutelkluis','sleutelkluis_code','smart_lock','poortcode','sleutel_sets','nood_lockout','huisregels'] },
+    { title: '8. SCHOONMAAK & LINNEN', fields: ['linnen_akkoord','schoonmaak_instructies'] },
+    { title: '9. PAKKETKEUZE', fields: ['pakket'] },
+    { title: '10. ONDERHOUD', fields: ['gebreken','apparatuur_instructies'] },
+    { title: '11. SENMO SENSOREN', fields: ['senmo'] },
+    { title: '12. COMMUNICATIE', fields: ['betrokkenheid','bereikbaarheid','rapportages','auto_communicatie','startdatum','verwachtingen','succes_definitie','opmerkingen'] }
   ];
-
   sections.forEach(s => {
     body += `${s.title}\n${'-'.repeat(s.title.length)}\n`;
-    s.fields.forEach(f => {
-      const val = data[f];
-      if (val) body += `${labels[f] || f}: ${val}\n`;
-    });
+    s.fields.forEach(f => { if (data[f]) body += `${labels[f] || f}: ${data[f]}\n`; });
     body += '\n';
   });
   return body;
 }
 
-// ── Submit via Formspree ──────────────────────────
+// ── Submit ────────────────────────────────────────
 document.getElementById('intakeForm').addEventListener('submit', async function(e) {
   e.preventDefault();
-
-  // Validatie verplichte velden
   let valid = true;
   const radioNames = new Set();
   document.querySelectorAll('input[type="radio"][required]').forEach(el => radioNames.add(el.name));
-  radioNames.forEach(name => {
-    if (!document.querySelector(`[name="${name}"]:checked`)) valid = false;
-  });
+  radioNames.forEach(name => { if (!document.querySelector(`[name="${name}"]:checked`)) valid = false; });
   document.querySelectorAll('input:not([type="radio"]):not([type="checkbox"])[required], textarea[required], select[required]').forEach(el => {
     el.classList.remove('invalid');
     if (!el.value.trim()) { el.classList.add('invalid'); valid = false; }
   });
-
   if (!valid) {
     showToast('⚠️ Vul alle verplichte velden in (gemarkeerd met *)', 'error');
     const firstInvalid = document.querySelector('.invalid');
     if (firstInvalid) firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
     return;
   }
-
   const btn = document.getElementById('submitBtn');
   btn.disabled = true;
   btn.textContent = 'Verzenden...';
-
   const data = collectFormData();
-  const emailBody = formatEmail(data);
-  const eigenaarNaam = data.naam_eigenaar || 'Onbekend';
-  const woningNaam = data.naam_verblijf || 'Onbekend';
-
   try {
     const response = await fetch('https://formspree.io/f/xwvywykj', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({
-        _subject: `Nieuw intakeformulier — ${eigenaarNaam} | ${woningNaam}`,
+        _subject: `Nieuw intakeformulier verhuur — ${data.naam_eigenaar || 'Onbekend'} | ${data.naam_verblijf || 'Onbekend'}`,
         _replyto: data.email_eigenaar,
-        Naam_eigenaar: eigenaarNaam,
-        Woning: woningNaam,
-        Email_eigenaar: data.email_eigenaar,
+        Naam: data.naam_eigenaar,
+        Woning: data.naam_verblijf,
+        Pakket: data.pakket,
+        Email: data.email_eigenaar,
         Telefoon: data.telefoon_eigenaar,
-        Volledig_overzicht: emailBody
+        Volledig_overzicht: formatEmail(data)
       })
     });
-
     if (response.ok) {
       document.querySelector('.form-container').innerHTML = `
         <div style="text-align:center; padding: 80px 40px; background: var(--white); border-radius: 8px; border: 1px solid var(--border);">
           <div style="font-size: 48px; margin-bottom: 20px;">✓</div>
-          <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300; color: var(--deep); margin-bottom: 16px;">
-            Formulier ontvangen!
-          </h2>
-          <p style="color: var(--muted); font-size: 15px; max-width: 420px; margin: 0 auto;">
-            Bedankt voor het invullen. Casa Care Costa Blanca neemt binnen 1–2 werkdagen contact met u op.
-          </p>
+          <h2 style="font-family:'Cormorant Garamond',serif; font-size:32px; font-weight:300; color:var(--deep); margin-bottom:16px;">Formulier ontvangen!</h2>
+          <p style="color:var(--muted); font-size:15px; max-width:420px; margin:0 auto;">Bedankt voor het invullen. Casa Care Costa Blanca neemt binnen 1–2 werkdagen contact met u op.</p>
         </div>`;
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      throw new Error('Formspree error');
-    }
-  } catch (err) {
-    console.error(err);
+    } else { throw new Error('error'); }
+  } catch(err) {
     showToast('⚠️ Er ging iets mis. Probeer het opnieuw.', 'error');
     btn.disabled = false;
     btn.textContent = 'Formulier verzenden';
